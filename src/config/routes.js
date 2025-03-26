@@ -2,17 +2,19 @@ const routes = {
     home: '/',
     login: '/login',
     register: '/register',
-    cart: '/cart',
-    productDetail: '/productDetail',
-    payment: '/payment',
+    posts: '/posts',
+    postDetail: '/postDetail',
     contact: '/contact',
 
     // Route Admin
     dashboard: '/admin/dashboard',
-    products: '/admin/products',
-    orderLists: '/admin/orderLists',
-    productStock: '/admin/productStock',
-    statistical: '/admin/statistical',
+    postsAdmin: '/admin/posts',
+    media: '/admin/media',
+    pages: '/admin/pages',
+    themes: '/admin/themes',
+    usersAdmin: '/admin/users',
+    editPage: '/admin/pages/edit/:pageName',
+    editPost: '/admin/posts/edit',
 }
 
 export default routes

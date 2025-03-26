@@ -1,6 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { publicRoutes, privateRoutes, adminRoutes } from '~/routes';
 import routesConfig from '~/config/routes';
+import { useContext, } from 'react';
+import { Theme1, Theme2, Theme3 } from './themes';
+import { DefaultLayout } from './layouts';
+import { LayoutContext } from './context/LayoutContext';
 
 const isAuthenticated = () => !!localStorage.getItem('authToken');
 const getUserRole = () => localStorage.getItem('userRole');
@@ -18,29 +22,50 @@ const PrivateRoute = ({ children, requiredRole }) => {
   return children;
 };
 
-const renderRoutes = (routes, requiredRole = null) => {
-  return routes.map(({ path, component: Page, layout: Layout }, index) => (
-    <Route
-      key={index}
-      path={path}
-      element={
-        requiredRole ? (
-          <PrivateRoute requiredRole={requiredRole}>
-            <Layout>
-              <Page />
-            </Layout>
-          </PrivateRoute>
-        ) : (
-          <Layout>
-            <Page />
-          </Layout>
-        )
-      }
-    />
-  ));
-};
-
 function App() {
+  const { selectedLayout } = useContext(LayoutContext);
+
+
+  const getLayout = (layout) => {
+    if (layout) return layout;
+    switch (selectedLayout) {
+      case "layout1":
+        return Theme1;
+      case "layout2":
+        return Theme2;
+      case "layout3":
+        return Theme3;
+      default:
+        return DefaultLayout;
+    }
+  };
+
+  const renderRoutes = (routes, requiredRole = null, forceLayout = null) => {
+    return routes.map(({ path, component: Page, layout }, index) => {
+      const LayoutComponent = forceLayout || getLayout(layout);
+
+      return (
+        <Route
+          key={index}
+          path={path}
+          element={
+            requiredRole ? (
+              <PrivateRoute requiredRole={requiredRole}>
+                <LayoutComponent>
+                  <Page />
+                </LayoutComponent>
+              </PrivateRoute>
+            ) : (
+              <LayoutComponent>
+                <Page />
+              </LayoutComponent>
+            )
+          }
+        />
+      );
+    });
+  };
+
   return (
     <Router>
       <div className="App">
