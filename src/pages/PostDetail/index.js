@@ -1,129 +1,138 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { GiBrain } from "react-icons/gi";
+import { CiHeart } from "react-icons/ci";
+import { FaRegComment } from "react-icons/fa";
+import { IoSyncSharp } from "react-icons/io5";
+import { RiArrowRightSLine } from "react-icons/ri";
 
 const PostDetail = () => {
-    const { postId } = useParams();
-    const [post, setPost] = useState(null);
-    const [relatedPosts, setRelatedPosts] = useState([]);
-    const [popularPosts, setPopularPosts] = useState([]);
-
-    useEffect(() => {
-        // Giả lập fetch data
-        setTimeout(() => {
-            setPost({
-                id: postId,
-                title: "Việt Nam - Singapore sẽ trở thành điển hình hợp tác trong khu vực",
-                image: "https://i1-vnexpress.vnecdn.net/2025/03/26/z6443255263359-dfc6d1ba4d3217e-5701-5509-1742967388.jpg?w=680&h=0&q=100&dpr=1&fit=crop&s=iEw8pc4Cvm99l1Jgy4qW5Q",
-                content: [
-                    {
-                        type: "text", value: `Thủ tướng Phạm Minh Chính và Thủ tướng Singapore Lawrence Wong hội đàm, nhất trí các biện pháp tạo đột phá cho quan hệ song phương, đưa hợp tác hai nước trở thành điển hình trong khu vực.
-
-Thủ tướng Phạm Minh Chính và Thủ tướng Singapore Lawrence Wong ngày 26/3 hội đàm tại trụ sở Chính phủ, bày tỏ hài lòng về các bước phát triển trong quan hệ song phương, khi Singapore duy trì vị trí nhà đầu tư thứ hai thế giới vào Việt Nam, còn Việt Nam trở thành nước xuất khẩu gạo lớn nhất vào Singapore.
-
-Thêm hai khu công nghiệp Việt Nam - Singapore (VSIP) được cấp chủ trương chấp thuận đầu tư, tạo nên mạng lưới 20 khu VSIP tại 14 tỉnh thành Việt Nam, kim ngạch thương mại tăng trưởng ổn định, đạt 10,3 tỷ USD năm 2024.
-
-Hai bên cũng ghi nhận những tiến triển tích cực trong hợp tác quốc phòng - an ninh, giáo dục - đào tạo, khoa học - công nghệ, du lịch, lao động và giao lưu nhân dân, theo thông cáo Bộ Ngoại giao.
-
-Hai lãnh đạo nhất trí về các biện pháp "quyết đoán, kịp thời" để gia tăng tin cậy chính trị, tạo đột phá mới cho quan hệ Đối tác Chiến lược Toàn diện. Hai bên cam kết tăng cường gắn kết kinh tế thông qua phát huy hiệu quả 5 trụ cột của Hiệp định về Kết nối hai nền kinh tế, quan hệ Đối tác Kinh tế Xanh - Kinh tế Số, đưa hợp tác Việt Nam - Singapore trở thành điển hình hợp tác trong khu vực.` },
-                    { type: "image", value: "https://i1-vnexpress.vnecdn.net/2025/03/26/z6443255263359-dfc6d1ba4d3217e-5701-5509-1742967388.jpg?w=680&h=0&q=100&dpr=1&fit=crop&s=iEw8pc4Cvm99l1Jgy4qW5Q" },
-                    {
-                        type: "text", value: `Thủ tướng Phạm Minh Chính đề nghị Singapore tạo điều kiện đưa hàng nông, lâm, thủy sản, thực phẩm chế biến của Việt Nam vào hệ thống phân phối của Singapore; phát triển mạng lưới VSIP 2.0 theo hướng bền vững, thông minh, áp dụng công nghệ sản xuất thông minh để tối ưu hóa hiệu quả thu hút nguồn vốn chất lượng cao vào Việt Nam.
-
-Thủ tướng Singapore nhất trí hai nước cần làm rõ các nội dung chính để nâng cấp hệ thống VSIP hiện nay lên VSIP 2.0 đáp ứng yêu cầu phát triển xanh hơn, thông minh hơn và hiệu quả hơn.
-
-Thủ tướng Singapore nhất trí đề xuất "6 hơn" của Thủ tướng Phạm Minh Chính, gồm thúc đẩy tin cậy chính trị sâu sắc hơn, hợp tác quốc phòng và an ninh thực chất hơn, kết nối hai nền kinh tế hiệu quả hơn, giao lưu nhân dân gắn kết hơn, hợp tác khoa học - công nghệ, đổi mới sáng tạo đột phá hơn và hợp tác khu vực quốc tế chặt chẽ hơn.
-
-Ông Lawrence Wong đề nghị hai nước sớm có những bước phát triển thực chất trong xuất khẩu điện gió ngoài khơi, trao đổi tín chỉ cacbon, hợp tác trong lĩnh vực công nghệ tài chính thông qua dự án kết nối thanh toán bán lẻ xuyên biên giới sử dụng mã QR, truyền dữ liệu xuyên biên giới, qua đó tạo thuận lợi hơn nữa cho hoạt động sản xuất, kinh doanh của doanh nghiệp hai nước.
-
-Hai Thủ tướng nhất trí tiếp tục thúc đẩy hợp tác trên các lĩnh vực then chốt khác, như giáo dục, đào tạo, nâng cao chất lượng nguồn nhân lực, an ninh lương thực, giao lưu văn hóa, nghệ thuật, du lịch, kết nối hàng không, kết nối doanh nghiệp và người dân.
-
-Thủ tướng Phạm Minh Chính đề nghị Singapore tiếp nhận lao động Việt Nam theo hình thức visa lao động, mở rộng các ngành nghề tiếp nhận lao động, tạo điều kiện học tiếng Việt trong các trường có nhiều học sinh người Việt, phát huy vai trò tích cực của cộng đồng người Việt ở Singapore.
-
-Hai Thủ tướng nhất trí duy trì lập trường chung của ASEAN trong vấn đề Biển Đông; nhấn mạnh tầm quan trọng của tự do, an toàn hàng hải, hàng không; bảo đảm thực hiện đầy đủ và hiệu quả Tuyên bố về ứng xử của các bên ở Biển Đông (DOC); tạo môi trường thuận lợi, phấn đấu xây dựng Bộ Quy tắc ứng xử tại Biển Đông (COC) thực chất và hiệu quả, phù hợp với luật pháp quốc tế và Công ước Liên Hợp Quốc về Luật Biển (UNCLOS) 1982.
-
-Sau hội đàm, hai Thủ tướng chứng kiến lễ ký kết văn kiện hợp tác giữa hai nước, trong đó có Ý định thư về Hợp tác xây dựng Chương trình Hành động triển khai quan hệ Đối tác Chiến lược Toàn diện và các thỏa thuận trong lĩnh vực thương mại điện gió, thanh toán xuyên biên giới sử dụng mã QR, phát triển số và đổi mới sáng tạo, giao lưu nhân dân.
-
-Hai lãnh đạo cũng dự lễ khởi công VSIP Thái Bình, được kết nối trực tuyến từ trụ sở Chính phủ tới Khu công nghiệp VSIP tại huyện Thái Thụy, tỉnh Thái Bình.
-
-Dự án đầu tư xây dựng và kinh doanh kết cấu hạ tầng khu công nghiệp VSIP Thái Bình có quy mô hơn 333 ha và tổng số vốn đầu tư hơn 4.932 tỷ đồng (gần 212 triệu USD), được đánh giá là điểm đến lý tưởng cho các ngành công nghiệp mũi nhọn, bao gồm linh kiện điện tử, cơ khí chế tạo, công nghiệp phụ trợ và năng lượng tái tạo.` },
-                    { type: "image", value: "https://i1-vnexpress.vnecdn.net/2025/03/26/z6443874639615-8a79ec34b0cd255-2981-9531-1742973876.jpg?w=680&h=0&q=100&dpr=1&fit=crop&s=8eP73MlGrrsvAfX4Aj778w" },
-                    {
-                        type: "text", value: `Việt Nam - Singapore thiết lập quan hệ ngoại giao ngày 1/8/1973. Việt Nam là quốc gia thành viên ASEAN đầu tiên mà Singapore thiết lập quan hệ Đối tác Chiến lược Toàn diện.
-
-Thủ tướng Singapore Lawrence Wong thăm chính thức Việt Nam ngày 25-26/3. Đây là chuyến thăm chính thức đầu tiên tới Việt Nam của ông với tư cách là Thủ tướng Singapore. Chuyến thăm của Thủ tướng Lawrence Wong diễn ra sau hơn một tuần kể từ khi Tổng Bí thư Tô Lâm thăm Singapore và nâng cấp quan hệ hai nước lên Đối tác Chiến lược Toàn diện.
-
-Trong chuyến thăm, ngoài hội đàm với Thủ tướng Phạm Minh Chính, Thủ tướng Lawrence Wong dự kiến hội kiến các lãnh đạo cấp cao Đảng, Nhà nước, Quốc hội Việt Nam và tiến hành một số hoạt động khác.` }
-                ],
-                date: "26/03/2025",
-                author: "Nguyễn Văn A"
-            });
-            setRelatedPosts([
-                { id: 2, title: "Bài viết liên quan 1", image: "https://i1-vnexpress.vnecdn.net/2025/03/25/AFP2025031720250315174520L2v1H-4727-1477-1742893929.jpg?w=300&h=180&q=100&dpr=1&fit=crop&s=L7QvELtzn5JWk7OnUC2KOQ" },
-                { id: 3, title: "Bài viết liên quan 2", image: "https://i1-vnexpress.vnecdn.net/2025/03/26/settop-1742961040-1742961053-1-2062-7345-1742961396.png?w=300&h=180&q=100&dpr=1&fit=crop&s=XqpKMh_al24NFYIVxTi9Bw" },
-            ]);
-            setPopularPosts([
-                { id: 2, title: "Tiger Woods hẹn hò với con dâu cũ của ông Trump", image: "https://i1-vnexpress.vnecdn.net/2025/03/24/thiet-ke-chua-co-ten-96-174277-3621-1218-1742778634.png?w=300&h=180&q=100&dpr=1&fit=crop&s=F24UNN2mP6Gxo5ScQPy1jg" },
-                { id: 3, title: "Tổng thống Zelensky chỉ trích đặc phái viên của ông Trump", image: "https://i1-vnexpress.vnecdn.net/2025/03/26/5563187178137268740a-ukraine-1-8015-2928-1742946512.jpg?w=300&h=180&q=100&dpr=1&fit=crop&s=OQYzY8g-eLd4kVuUAkYNLQ" },
-                { id: 4, title: "Thủ tướng Singapore đến Việt Nam", image: "https://i1-vnexpress.vnecdn.net/2025/03/25/vnapotalthutuongsingaporetoiha-8928-4430-1742904283.jpg?w=300&h=180&q=100&dpr=1&fit=crop&s=tgE_h1VGpeg2cC8UiAtOxA" },
-                { id: 5, title: "Phái đoàn Mỹ, Nga kết thúc đàm phán về lệnh ngừng bắn ở Ukraine", image: "https://i1-vnexpress.vnecdn.net/2025/03/25/2025-03-24t164956z-75039069-rc-9072-8165-1742863061.jpg?w=300&h=180&q=100&dpr=1&fit=crop&s=oQx33T-ZsKXISld7Z6Aa2w" },
-                { id: 6, title: "Những người Mỹ ủng hộ chiến dịch trấn áp nhập cư của ông Trump", image: "https://i1-vnexpress.vnecdn.net/2025/03/22/tru-c-xua-t-de-n-guatemala-2-1-2167-7011-1742621668.jpg?w=300&h=180&q=100&dpr=1&fit=crop&s=yDJkaLoi4zcauFuXYUAzyg" },
-            ]);
-        }, 1000);
-    }, [postId]);
 
     return (
-        <div className="container my-4">
-            <div className="row">
+        <div className="container my-4  ">
+            <div className="row justify-content-center">
                 {/* Bài viết chi tiết */}
-                <div className="col-lg-8">
-                    {!post ? (
-                        <div className="placeholder-glow">
-                            <div className="placeholder col-12" style={{ height: "300px" }}></div>
+                <div className="col-lg-8  ">
+                    <div className="d-flex  align-items-center gap-3">
+                        <p className="fs-4 mb-0">MENTAL HEALTH</p>
+                        <GiBrain size={30} color="pink" />
+                    </div>
+                    <h1>Làm Sao Để Giữ Lửa Trong Công Việc?</h1>
+                    <p className="fs-5">hay là cách để phòng tránh và ứng phó với burnout (kiệt sức)</p>
+                    <div className="d-flex  align-items-center mt-3 gap-3">
+                        <img src="https://mighty.tools/mockmind-api/content/human/125.jpg" className="rounded-circle" style={{ width: "35px", height: "35px" }} alt="avatar" />
+                        <div className="d-flex flex-column text-uppercase text-secondary" style={{ fontSize: "12px", lineHeight: "1.2" }}>
+                            <p className="mb-2 fw-semibold">Tien Pham</p>
+                            <span>Feb 16, 2025</span>
                         </div>
-                    ) : (
-                        <article>
-                            <h1 className="fw-bold mb-3">{post.title}</h1>
-                            <p className="text-muted mb-2">{post.date} - {post.author}</p>
-                            {post.content.map((item, index) => (
-                                item.type === "text" ? (
-                                    <p key={index} className="fs-5">{item.value}</p>
-                                ) : (
-                                    <img key={index} src={item.value} alt="Bài viết hình ảnh" className="img-fluid rounded my-3" />
-                                )
-                            ))}
-                        </article>
-                    )}
+                    </div>
+                    <hr className=" border-2 border-dark" style={{ marginTop: "30px" }} />
+
+                    <div className=" d-flex align-items-center justify-content-between " >
+                        <div className="d-flex align-items-center " style={{ cursor: "pointer" }}>
+                            <div className="rounded-pill  border border-secondary px-3 py-2 me-2 d-flex align-items-center">
+                                <CiHeart size={20} className="me-2" />
+                                12
+                            </div>
+                            <div className="rounded-pill border border-secondary px-3 py-2 me-2 d-flex align-items-center">
+                                <FaRegComment size={20} className="me-2" />
+                            </div>
+                            <div className="rounded-pill border border-secondary px-3 py-2 me-2 d-flex align-items-center">
+                                <IoSyncSharp size={20} className="me-2" />
+                                1
+                            </div>
+                        </div>
+                        <div className="rounded-pill border border-secondary px-4 py-2" style={{ cursor: "pointer" }}>
+                            Share
+                        </div>
+                    </div>
+                    <hr className=" border-2 border-dark" style={{ marginTop: "30px" }} />
+                    <div>
+                        <h5>Chào bạn,</h5>
+                        <p>
+                            Mấy tuần qua, mình quan sát thấy một số dấu hiệu bản thân đang bị kiệt sức trong công việc.
+                            Đó là cảm giác mà mình đã từng gặp vào khoảng ba năm trước, khi mình quyết định nghỉ việc giảng dạy ở trường: Không thấy niềm vui trong những
+                            việc mình đang làm và cảm thấy cạn kiệt năng lượng vào buổi sáng khi thức dậy.
+                        </p>
+                        <p>
+                            Cách mình xử lý vấn đề này bây giờ khác nhiều với thời điểm đó ở chỗ, mình đã dễ dàng công nhận rằng bản thân đang cần được giúp đỡ thay vì tự trách móc và nghi ngờ công việc mình đang làm. Một khái niệm đã giúp mình tiếp cận vấn đề này lành mạnh và hiệu quả hơn đó là burnout - kiệt sức. Vì vậy, hôm nay mình sẽ chia sẻ với bạn một chút về burnout.
+                        </p>
+                        <span>Hy vọng bạn thích bài viết tuần này (dù tựa đề nghe có vẻ không tươi sáng mấy)</span>
+                        <hr className=" border-2 border-dark" style={{ marginTop: "30px" }} />
+                        <div className="d-flex align-items-center justify-content-center mt-4">
+                            <Link
+                                to="#"
+                                className="text-white text-decoration-none fw-semibold d-flex align-items-center rounded-3 bg-primary border px-3 py-2"
+                            >
+                                Upgrade to paid
+                                <RiArrowRightSLine className="fs-3" />
+                            </Link>
+                        </div>
+                        <p className="mt-3">Theo Phân Loại Bệnh Tật Quốc Tế (ICD-11) do Tổ chức Y tế Thế giới (WHO) soạn thảo và ban hành, kiệt sức (burnout) được liệt kê vào vấn đề thuộc nhóm sức khoẻ nghề nghiệp - occupational phenomenon.</p>
+                        <p>Burnout được mô tả trong chương "Factors influencing health status or contact with health services" - bao gồm những lý do khiến mọi người tìm kiếm dịch vụ chăm sóc sức khoẻ nhưng lại không được tính là bệnh hoặc vấn đề y tế.</p>
+                        <span>Nguyên văn định nghĩa từ QD-85, ICD-11:</span>
+                        <div className="d-flex gap-3 mt-3">
+                            <div style={{ background: "purple", width: "4px", height: "300px" }}></div>
+                            <div>
+                                <p>Burnout is a syndrome conceptualized as resulting from chronic workplace stress that has not been successfully managed.</p>
+                                <span>It is characterized by three dimensions:</span>
+                                <ul className="mt-3">
+                                    <li className="mb-2">feelings of energy depletion or exhaustion;</li>
+                                    <li className="mb-2">increased mental distance from one’s job;</li>
+                                    <li>or feelings of negativism or cynicism related to one’s job; and a sense of ineffectiveness and lack of accomplishment.</li>
+                                </ul>
+                                <p>Burnout refers specifically to phenomena in the occupational context and should not be applied to describe experiences in other areas of life.</p>
+                            </div>
+                        </div>
+                        <p className="mt-3">Có thể tạm dịch:</p>
+                        <div className="d-flex gap-3 mt-3">
+                            <div style={{ background: "purple", width: "4px", height: "200px" }}></div>
+                            <div>
+                                <p>Burn-out là một hội chứng xảy ra do hệ quả của căng thẳng công việc kéo dài mà không được xử lý hiệu quả. Hội chứng này được đặc trưng bởi ba khía cạnh:</p>
+                                <ul className="mt-3">
+                                    <li className="mb-2">cảm giác kiệt quệ năng lượng hoặc mệt mỏi;</li>
+                                    <li className="mb-2">cảm giác thiếu kết nối và xa cách với công việc;</li>
+                                    <li>hoặc cảm giác tiêu cực, hoài nghi liên quan đến công việc; và suy giảm cảm nhận về hiệu quả và thành tựu trong công việc.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <img style={{ height: "500px" }} src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7770df20-4f5b-4567-b934-5c7e58fb684c_1420x916.png" alt="" />
+                        <p>Một số nghề nghiệp có nguy cơ cao gặp phải burnout là bác sĩ, y tá, giáo viên, luật sư, start-up founders, chủ doanh nghiệp, và nhân viên các ngành dịch vụ. Nhà nghiên cứu và người làm trong môi trường học thuật có khối lượng công việc lớn cũng có thể đối diện với burnout. Nhưng thực ra thì bất kỳ công việc hay ngành nghề nào cũng có thể có nguy cơ gây kiệt sức nếu nó phát sinh những chu kỳ stress lặp đi lặp lại mà không được giải quyết hiệu quả. Một số yếu tố gia tăng nguy cơ burnout là môi trường làm việc độc hại và/hoặc thiếu hỗ trợ, thời gian làm việc dài, và công việc đòi hỏi cao về lao động cảm xúc và/hoặc trí óc.</p>
+                        <p>Dù ICD-11 chỉ công nhận burnout trong bối cảnh nghề nghiệp, người ta cũng thường dùng từ burnout để chỉ việc mất niềm vui vào một việc gì đó, ví dụ như parenting burnout - kiệt sức liên quan đến nuôi dạy con. Theo nghĩa này thì burnout khá gần với một triệu chứng của trầm cảm trong Cẩm nang Chẩn đoán và Thống kê Rối loạn Tâm thần, lần thứ 5) của Hiệp hội Tâm thần Hoa Kỳ (APA) (DSM-V), dù rằng burnout không được ghi nhận trong đây như một rối loạn tâm thần.</p>
+                        <p>Nếu bạn đọc các sách vở, tài liệu, hoặc nội dung từ các influencers trên mạng xã hôi hoặc bài diễn văn truyền cảm hứng từ những người nổi tiếng, bạn sẽ thấy là những người này tập trung nhiều vào các tips và tricks giúp bạn chống lại kiệt sức bằng cách tự biết chăm sóc mình, hay học cách tự quản lý cuộc sống và công việc của bản thân,… Tuy nhiên, chuyên gia về burnout sẽ nói với bạn rằng các bí kíp đó không thực sự hiệu quả nếu như không có sự thay đổi trong chính môi trường làm việc của bạn.</p>
+                        <p>Dù thay đổi công việc mà các chuyên gia nói không chỉ có biện pháp cực đoan nhất là ... nghỉ việc, nhưng đôi khi chúng ta đợi đến khi mọi chuyện không thể cứu vãn rồi mới hành động. Vì vậy, khi nhắc tới thay đổi môi trường làm việc thì mọi người thường nghĩ ngay tới chuyện nộp đơn thôi việc. Tuy nhiên, thay đổi môi trường làm việc còn có nghĩa là áp dụng các biện pháp như thay đổi một số cách tiếp cận trong công việc chẳng hạn như cách giao tiếp với sếp và cộng sự, để dần cải thiện tình hình, nhằm mang lại một môi trường làm việc tốt hơn cho chính bạn và đồng nghiệp của bạn.</p>
+                        <p>Với burnout, bạn không thể giải quyết bằng cách quyết tâm đề phòng nó như một kiểu "New Year Resolution" về việc self-care tốt hơn, hoặc chạy trốn khỏi nó, hoặc đè nén và không công nhận sự hiện diện của nó. Cách để ứng phó với burnout là chấp nhận rằng mình đang có vấn đề và cần được trợ giúp.
+
+                            Trợ giúp đầu tiên là sự tự thấu cảm - self-compassion. Đó là suy nghĩ rằng "Tôi đang cần được chăm sóc, thấu hiểu, và không nên chịu sự phán xét chỉ vì tôi không làm tốt như mong muốn."</p>
+                        <p>Trợ giúp thứ hai đến từ bên ngoài. Hãy nhìn vào môi trường làm việc của bạn và tự hỏi: "Tại sao tôi đang trải qua điều này? Điều gì trong công việc của tôi hay những tương tác trong công việc khiến cho tôi có cảm giác này?" và đi tìm sự trợ giúp cho các vấn đề này dựa vào mức độ ưu tiên (nghiêm trọng) và/hoặc mức độ khả thi.</p>
+                        <hr className=" border-2 border-dark" style={{ marginTop: "30px" }} />
+                        <p className="text-center" style={{ maxWidth: "800px" }}>Đôi khi chúng ta chán ghét công việc của mình không phải vì bản thân công việc đó, mà chỉ bởi vì chúng ta đã không khoẻ, trong suốt một thời gian dài.</p>
+                        <hr className=" border-2 border-dark" style={{ marginTop: "30px" }} />
+                        <p>Ngày 18/2 và 23/2 sắp tới, cộng đồng học tập tại Đông Labs tổ chức hai buổi workshop với chủ đề Tổng Kết Năm, mở ra một không gian cho bất kỳ ai muốn dành cho mình một không gian riêng để hồi tưởng, suy ngẫm, và xây dựng nội lực bản thân để phát triển bản thân. Nếu bạn muốn tự làm tổng kết năm thì cũng có thể sử dụng mẫu của Đông Labs tại đây.</p>
+                        <span>Mong gặp bạn ở đó, còn nếu không thì, hẹn gặp lại bạn trong bài viết tuần sau! :)</span>
+                        <div>
+                            <div className="d-flex align-items-center justify-content-center mt-4">
+                                <Link
+                                    to="#"
+                                    className="text-white text-decoration-none fw-semibold d-flex align-items-center rounded-3 bg-primary border px-3 py-2"
+                                >
+                                    Tổng Kết Năm offline
+                                </Link>
+                            </div>
+                            <div className="d-flex align-items-center justify-content-center mt-4">
+                            <Link
+                                to="#"
+                                className="text-white text-decoration-none fw-semibold d-flex align-items-center rounded-3 bg-primary border px-3 py-2"
+                            >
+                                Tổng Kết Năm online
+                            </Link>
+                        </div>
+                        </div>
+                    </div>
                 </div>
 
-                {/* Danh sách bài viết xem nhiều */}
-                <div className="col-lg-4">
-                    <aside>
-                        <h3 className="fw-semibold mb-3">Xem nhiều</h3>
-                        {popularPosts.map((item) => (
-                            <div className="d-flex mb-3" key={item.id}>
-                                <img src={item.image} alt={item.title} className="me-3" style={{ width: "80px", height: "60px", objectFit: "cover" }} />
-                                <p className="mb-0">{item.title}</p>
-                            </div>
-                        ))}
-                    </aside>
-                </div>
             </div>
 
-            <aside className="mt-5">
-                <h2 className="fw-semibold mb-3">Bài viết liên quan</h2>
-                <div className="row">
-                    {relatedPosts.map((item) => (
-                        <div className="col-md-6 mb-3" key={item.id}>
-                            <div className="card">
-                                <img src={item.image} alt={item.title} className="card-img-top" />
-                                <div className="card-body">
-                                    <p className="card-title fw-semibold">{item.title}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </aside>
         </div>
     );
 };
